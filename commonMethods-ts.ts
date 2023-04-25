@@ -15,20 +15,22 @@ export const isIe = () => {
  * @param {String} hex 
  * @param {Number} opacity 
  */
-export function hex2Rgba(hex, opacity) {
+export function hex2Rgba(hex:string, opacity:number) {
 	if(!hex) hex = "#2c4dae";
     return "rgba(" + parseInt("0x" + hex.slice(1, 3)) + "," + parseInt("0x" + hex.slice(3, 5)) + "," + parseInt("0x" + hex.slice(5, 7)) + "," + (opacity || "1") + ")";
 }
 // 去除html标签
-export const htmlSafeStr = (str) => {
+export const htmlSafeStr = (str:string) => {
     return str.replace(/<[^>]+>/g, "")
 }
 /* 获取url参数 */
 export const getQueryString = () => {
     const qs = location.href.split('?')[1] || '',
-        args = {},
+        args:{
+            [key:string]:string
+        } = {},
         items = qs.length ? qs.split("&") : [];
-        items.forEach((item,i) => {
+        items.forEach((item) => {
             const arr = item.split('='),
                 name = decodeURIComponent(arr[0]),
                 value = decodeURIComponent(arr[1]);
@@ -37,7 +39,7 @@ export const getQueryString = () => {
     return args;
 }
 /* 解析url参数 */
-export const paramsToStringify = (params) => {
+export const paramsToStringify = (params:any) => {
     if(params){
         const query:Array<any> = [];
         for(const key in params){
@@ -49,7 +51,7 @@ export const paramsToStringify = (params) => {
     }
 }
 // 将数据转化为数组
-export const toArray = (data) => {
+export const toArray = (data:any) => {
     return Array.isArray(data) ? data : [data]
 }
 /**
@@ -58,7 +60,9 @@ export const toArray = (data) => {
  * @param {Object} params 
  */
 
-export const toPage = (url, params) => {
+export const toPage = (url:string, params:{
+    [key:string]:string
+}) => {
     if(params){
         const query:Array<any> = [];
         for(const key in params){
@@ -95,7 +99,7 @@ export const getSubStringSum = (str = "", num = 1) => {
  * @param {number} len 生成指定长度的uuid
  * @param {number} radix uuid进制数
  */
-export function uuid(len, radix) {
+export function uuid(len:number, radix:number) {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
     const uuid:Array<any> = [];
     let i;
@@ -125,7 +129,7 @@ export function uuid(len, radix) {
  * @param {*} timeStemp 时间戳
  * @param {*} flag 格式符号
  */
-export function formatTime(timeStemp, flag) {
+export function formatTime(timeStemp:any, flag:any) {
     const time = new Date(timeStemp);
     const timeArr = [time.getFullYear(), time.getMonth() + 1, time.getDate()];
     return timeArr.join(flag || '/')
